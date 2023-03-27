@@ -3,7 +3,7 @@ import Pattern from "./components/Pattern";
 function App() {
   return (
     <div className="App">
-      <Pattern />
+      <Pattern instrument="bass" />
     </div>
   );
 }

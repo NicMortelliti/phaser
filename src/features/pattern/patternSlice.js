@@ -1,52 +1,38 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   tempo: 90,
-  bass: {
-    1: 0,
-    2: 0,
-    3: 0,
-    4: 0,
-    5: 0,
-    6: 0,
-    7: 0,
-    8: 0,
-    9: 0,
-    10: 0,
-    11: 0,
-    12: 0,
-    13: 0,
-    14: 0,
-    15: 0,
-    16: 0,
-  },
-  snare: {
-    1: 0,
-    2: 0,
-    3: 0,
-    4: 0,
-    5: 0,
-    6: 0,
-    7: 0,
-    8: 0,
-    9: 0,
-    10: 0,
-    11: 0,
-    12: 0,
-    13: 0,
-    14: 0,
-    15: 0,
-    16: 0,
-  },
+  bass: [
+    [0, 0, 0, 0],
+    [0, 1, 0, 0], // ! Test if step 2 in bar 2 is selected
+    [0, 0, 1, 0],
+    [0, 0, 0, 0],
+  ],
+  snare: [
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+  ],
 };
 
-export const patternSlice = createSlice({
+const patternSlice = createSlice({
   name: "pattern",
   initialState,
   reducers: {
     resetPattern: (state) => (state = initialState),
-    updatePattern: (state, action) => {},
+    updatePattern: (state, action) => {
+      const { id, instrument, value } = action.payload;
+      return {
+        ...state,
+        [instrument]: state[instrument].map((bar, barIndex) =>
+          barIndex === id[0]
+            ? bar.map((step, stepIndex) => (stepIndex === id[1] ? value : step))
+            : bar
+        ),
+      };
+    },
   },
 });
-
+export const { resetPattern, updatePattern } = patternSlice.actions;
 export default patternSlice.reducer;
