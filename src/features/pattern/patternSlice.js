@@ -43,7 +43,10 @@ const initialState = {
 export const patternSlice = createSlice({
   name: "pattern",
   initialState,
+  reducers: {
+    resetPattern: (state) => (state = initialState),
+    updatePattern: (state, action) => {},
+  },
 });
 
 export default patternSlice.reducer;
-  
