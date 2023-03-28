@@ -20,17 +20,8 @@ const patternSlice = createSlice({
   name: "pattern",
   initialState,
   reducers: {
-    reset: (state) => (state = initialState),
-    updatePattern: (state, action) => {
-      const { id, instrument, value } = action.payload;
-      return {
-        ...state,
-        [instrument]: state[instrument].map((bar, barIndex) =>
-          barIndex === id[0]
-            ? bar.map((step, stepIndex) => (stepIndex === id[1] ? value : step))
-            : bar
-        ),
-      };
+    reset: () => {
+      return initialState;
     },
   },
 });
