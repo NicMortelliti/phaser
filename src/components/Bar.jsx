@@ -9,7 +9,9 @@ const Bar = ({ instrument, bar }) => {
   //                      16 steps per pattern)
   const RenderStepFourTimes = () => {
     return Array.from({ length: 4 }, (_, i) => (
-      <Step key={i} instrument={instrument} bar={bar} step={i} />
+      //  0           1           2              3
+      // [1, 2, 3, 4][5, 6, 7, 8][9, 10, 11, 12][13, 14, 15, 16]
+      <Step key={i} instrument={instrument} step={bar * 4 + i} />
     ));
   };
 

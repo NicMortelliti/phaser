@@ -3,25 +3,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { updatePattern } from "../features/pattern/patternSlice";
 import { StepBtn } from "../styles/Buttons.styled";
 
-const Step = ({ instrument, bar, step }) => {
+const Step = ({ instrument, step }) => {
   const dispatch = useDispatch();
   const pattern = useSelector((state) => state.pattern);
-
-  const stepIsSelected = pattern[instrument][bar][step];
 
   const handleClick = () => {
     dispatch(
       updatePattern({
-        id: [step, bar],
-        instrument: instrument,
-        value: stepIsSelected == 1 ? 0 : 1,
+        payload: { instrument: instrument, step: step },
       })
     );
   };
 
   return (
-    <StepBtn selected={stepIsSelected} onClick={() => handleClick()}>
-      {stepIsSelected}
+    <StepBtn selected={false} onClick={() => handleClick()}>
+      {step + 1}
     </StepBtn>
   );
 };
